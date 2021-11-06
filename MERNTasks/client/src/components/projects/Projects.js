@@ -1,8 +1,24 @@
-import React from 'react'
+import React from 'react';
+import Sidebar from '../layout/Sidebar';
+import Bar from '../layout/Bar';
+import TaskForm from '../tasks/TaskForm';
+import TaskList from '../tasks/TaskList';
 
 const Projects = () => {
     return ( 
-        <h1>Proyectos</h1>
+        <div className="contenedor-app">
+            <Sidebar/>
+
+            <div className="seccion-principal">
+                <Bar/>
+                <main>
+                    <TaskForm />
+                    <div className="contenedor-tareas">
+                        <TaskList />
+                    </div>
+                </main>
+            </div>
+        </div>
      );
 }
  
