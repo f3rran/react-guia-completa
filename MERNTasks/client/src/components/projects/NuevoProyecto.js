@@ -5,7 +5,7 @@ const NuevoProyecto = () => {
 
     //Obtener el state del form
     const projectsContext = useContext(projectContext);
-    const {form} = projectsContext;
+    const {form, showForm, errorform, storeProject, showError} = projectsContext;
 
     //State para proyecto
     const [proyecto, guardarProyecto] = useState({
@@ -27,10 +27,18 @@ const NuevoProyecto = () => {
         e.preventDefault();
 
         //Validar el proyecto
+        if (nombre === '') {
+            showError();
+            return;
+        }
 
         // Agregar al state
+        storeProject(proyecto);
 
         // Reiniciar el form
+        guardarProyecto({
+            nombre: ''
+        })
     }
 
     return ( 
@@ -38,6 +46,7 @@ const NuevoProyecto = () => {
             <button
                 type="button"
                 className="btn btn-block btn-primario"
+                onClick={() => showForm()}
             >
                 Nuevo Proyecto
             </button>
@@ -67,6 +76,8 @@ const NuevoProyecto = () => {
                 )
                 : null
             }
+
+            { errorform ? <p className="mensaje error">El nombre del proyecto es obligatorio</p> : null}
         </Fragment>
      );
 }
