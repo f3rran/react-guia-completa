@@ -1,6 +1,8 @@
 import React, {Fragment, useContext} from 'react'
 import Task from './Task';
 import projectContext from '../../context/projects/projectContext';
+import TaskContext from '../../context/tasks/taskContext';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const TaskList = () => {
 
@@ -8,12 +10,9 @@ const TaskList = () => {
     const projectsContext = useContext(projectContext);
     const {project, deleteProject} = projectsContext;
 
-    const tareas = [
-        {nombre: 'Elegir Plataforma', state: true},
-        {nombre: 'Elegir colores', state: false},
-        {nombre: 'Elegir pasarela de pago', state: false},
-        {nombre: 'Elegir hosting', state: true},
-    ];
+    //Obtener funcion del context de tasks
+    const TasksContext = useContext(TaskContext);
+    const {projectTasks} = TasksContext;
 
     if(!project) return <h2>Seleccione un proyecto</h2>;
 
@@ -24,14 +23,23 @@ const TaskList = () => {
         <Fragment>
             <h2>Proyecto: {currentProject.nombre}</h2>
             <ul className="listado-tareas">
-                {tareas.length === 0
+                {projectTasks.length === 0
                     ? (<li className="tarea"><p>No hay tareas ...</p> </li>)
                 
-                    : tareas.map(tarea => (
-                        <Task 
-                            task = {tarea}
-                        />
-                    ))
+                    : <TransitionGroup>
+                        {projectTasks.map(tarea => (
+                            <CSSTransition
+                                key={tarea.id}
+                                timeout={200}
+                                classNames="tarea"
+                            >
+                                <Task 
+                                    
+                                    task = {tarea}
+                                />
+                            </CSSTransition>
+                        )) }  
+                      </TransitionGroup>
                 }
             </ul>
 
