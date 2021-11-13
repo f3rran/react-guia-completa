@@ -1,0 +1,20 @@
+{
+  "name": "merntaskserver",
+  "version": "1.0.0",
+  "description": "MERN API para MERN Tasks",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "Ferran Esparza Micó",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  }
+}
