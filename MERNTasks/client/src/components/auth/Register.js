@@ -1,7 +1,12 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom'
+import React, {useContext, useState} from 'react';
+import {Link} from 'react-router-dom';
+import alertContext from '../../context/alerts/alertContext';
 
 const Register = () => {
+
+    //Extraer los valores del context
+    const AlertContext = useContext(alertContext);
+    const {alert, showAlert} = AlertContext;
 
     const [usuario, guardarUsuario] = useState({
         email: '',
@@ -23,16 +28,29 @@ const Register = () => {
         e.preventDefault();
 
         //Validar campos vacíos
+        if (nombre.trim() === '' || email.trim() === '' || password.trim() === ''  || confirmar.trim() === '') {
+            showAlert('Todos los campos son obligatorios', 'alerta-error');
+            return;
+        }
 
         //Passwords min. 6 caracteres
+        if (password.length < 6) {
+            showAlert('La contraseña debe contener al menos 6 caracteres', 'alerta-error');
+            return;
+        }
 
         //Passwords coinciden
+        if (password !== confirmar) {
+            showAlert('Las contraseñas deben coincidir', 'alerta-error');
+            return;
+        }
 
         //Pasarlo al action (reducer)
     }
 
     return ( 
         <div className="form-usuario">
+            { alert ? (<div className={`alerta ${alert.category}`}> {alert.msg} </div>) : null}
             <div className="contenedor-form sombra-dark">
                 <h1>Registro</h1>
 
