@@ -11,4 +11,13 @@ router.post('/',auth,[
     check('projectId', 'El proyecto es obligatorio').not().isEmpty(),
 ], taskController.createTask);
 
+//Obtener las tareas por proyecto
+router.get('/', auth, taskController.getTasks);
+
+//Update task
+router.put('/:id', auth, taskController.updateTask);
+
+//Eliminar tarea
+router.delete('/:id', auth, taskController.deleteTask);
+
 module.exports = router;
