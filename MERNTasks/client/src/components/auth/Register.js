@@ -1,12 +1,27 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import alertContext from '../../context/alerts/alertContext';
+import authContext from '../../context/authentication/authContext';
 
-const Register = () => {
+const Register = (props) => {
 
     //Extraer los valores del context
     const AlertContext = useContext(alertContext);
     const {alert, showAlert} = AlertContext;
+
+    const AuthContext = useContext(authContext);
+    const {registerUser, message, autenticado} = AuthContext;
+
+    //En caso que el usuario se haya autenticado, registrado o registro duplicado
+    useEffect(() => {
+        if (autenticado) {
+            props.history.push('/projects');
+        }
+
+        if (message) {
+            showAlert(message.msg, message.category);
+        }
+    }, [message, autenticado, props.history]);
 
     const [usuario, guardarUsuario] = useState({
         email: '',
@@ -46,6 +61,7 @@ const Register = () => {
         }
 
         //Pasarlo al action (reducer)
+        registerUser({nombre,email,password});
     }
 
     return ( 
