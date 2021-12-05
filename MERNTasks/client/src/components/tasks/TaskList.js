@@ -21,7 +21,7 @@ const TaskList = () => {
 
     return ( 
         <Fragment>
-            <h2>Proyecto: {currentProject.nombre}</h2>
+            <h2>Proyecto: {currentProject.name}</h2>
             <ul className="listado-tareas">
                 {projectTasks.length === 0
                     ? (<li className="tarea"><p>No hay tareas ...</p> </li>)
@@ -43,7 +43,7 @@ const TaskList = () => {
                 }
             </ul>
 
-            <button type="button" className="btn btn-eliminar" onClick={() => deleteProject(currentProject.id)}> Eliminar Proyecto &times; </button>
+            <button type="button" className="btn btn-eliminar" onClick={() => deleteProject(currentProject._id)}> Eliminar Proyecto &times; </button>
         </Fragment>
      );
 }
