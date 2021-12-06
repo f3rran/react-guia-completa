@@ -10,15 +10,15 @@ const Task = ({task}) => {
 
     //Obtener funcion del context de tasks
     const TasksContext = useContext(TaskContext);
-    const {destroyTask, getTasks, changeTaskState, saveCurrentTask} = TasksContext;
+    const {destroyTask, getTasks, saveCurrentTask, updateTask} = TasksContext;
 
     const[currentProject] = project;
 
     //Función que se ejecuta al pulsar eliminar
     const taskDelete = id => {
-        destroyTask(id);
+        destroyTask(id, currentProject._id);
 
-        getTasks(currentProject.id);
+        getTasks(currentProject._id);
     }
 
     //Func modificar estado tareas
@@ -29,17 +29,18 @@ const Task = ({task}) => {
             task.state = true;
         }
 
-        changeTaskState(task);
+        updateTask(task);
     }
 
     //Agregar tarea al editat
     const selectTask = task => {
+        task.nombre = task.name
         saveCurrentTask(task);
     }
 
     return ( 
         <li className="tarea sombra">
-            <p>{task.nombre}</p>
+            <p>{task.name}</p>
             <div className="estado">
                 {task.state ? 
                     (
@@ -75,7 +76,7 @@ const Task = ({task}) => {
                 <button
                     type="button"
                     className="btn btn-secundario"
-                    onClick={() => taskDelete(task.id)}
+                    onClick={() => taskDelete(task._id)}
                 >
                     Eliminar
                 </button>

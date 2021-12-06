@@ -58,8 +58,7 @@ const TaskForm = () => {
         if(selectedTask === null){
             //Creación
             //Agregar la nueva tarea al state de tareas
-            task.projectId = currentProject.id;
-            task.state = false;
+            task.projectId = currentProject._id;
             addTask(task);
         }else{
             //Edición
@@ -69,7 +68,7 @@ const TaskForm = () => {
         //Pasar la validación
 
         //Obtener y filtrar las tareas del proyecto actual
-        getTasks(currentProject.id);
+        getTasks(currentProject._id);
 
         //Reinicar form
         saveTask( {
