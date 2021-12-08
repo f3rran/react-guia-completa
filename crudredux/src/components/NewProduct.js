@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 //Actions de Redux
 import { createNewProductAction } from '../actions/productActions';
 
-const NewProduct = () => {
+const NewProduct = ({history}) => {
 
     //State del componente
     const [name, saveName] = useState('');
@@ -13,7 +14,13 @@ const NewProduct = () => {
     //Utilizar useDispatch y te crea una función
     const dispatch = useDispatch();
 
+    //Acceder al state del store
+    const loading = useSelector(state => state.productos.loading);
+    const error = useSelector(state => state.productos.error);
+
     const addProduct = product => dispatch(createNewProductAction(product));
+
+    let navigate = useNavigate();
 
     const submitNewProduct = e => {
         e.preventDefault();
@@ -30,6 +37,9 @@ const NewProduct = () => {
             name,
             price
         });
+
+        //Redireccionar a la home
+        navigate("/");
 
     }
 
@@ -75,6 +85,8 @@ const NewProduct = () => {
                                 Añadir
                             </button>
                         </form>
+                        {loading ? <p>Cargando...</p> : null}
+                        { error ? <p className="alert alert-danger p2 mt-4 text-center">Hubo un error</p> : null}
                     </div>
                 </div>
             </div>
