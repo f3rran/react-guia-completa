@@ -26,8 +26,8 @@
       "id": 5
     },
     {
-      "name": "Café cortado",
-      "price": 99,
+      "name": "Café cortado editao",
+      "price": "15",
       "id": 6
     }
   ]
