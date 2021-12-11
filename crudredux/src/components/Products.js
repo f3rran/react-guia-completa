@@ -15,7 +15,7 @@ const Products = () => {
         //Consultar API
         const loadProducts = () => dispatch(getProductsAction())
         loadProducts();
-        
+        // eslint-disable-next-line
     }, []);
 
     //Get the state products

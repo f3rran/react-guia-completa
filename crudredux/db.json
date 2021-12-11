@@ -29,6 +29,11 @@
       "name": "Café cortado editao",
       "price": "15",
       "id": 6
+    },
+    {
+      "name": "Ferran",
+      "price": 23,
+      "id": 7
     }
   ]
 }
